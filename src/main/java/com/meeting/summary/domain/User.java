@@ -3,9 +3,9 @@ package com.meeting.summary.domain;
 import java.time.LocalDateTime;
 
 /* 사용자 정보 */
-public class users {
-	private long id; 						//사용자 고유번호(SEQ)
-	private String userId; 					//사용자 ID
+public class User {
+	private Long userId;					//사용자 고유번호(SEQ)
+	private String loginId;					//사용자 ID
 	private String userPassword; 			//사용자 비밀번호
 	private String name; 					//사용자 이름
 	private String email;					//사용자 이메일
