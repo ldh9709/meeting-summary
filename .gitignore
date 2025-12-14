@@ -1,0 +1,28 @@
+# Build outputs
+/target/
+/build/
+/out/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE (Eclipse/STS)
+/.project
+/.classpath
+/.settings/
+
+# IntelliJ / VSCode
+/.idea/
+*.iml
+/.vscode/
+
+# Secrets (필요에 맞게 조정)
+.env
+*.key
+*.pem
+application.properties
+application-*.properties
