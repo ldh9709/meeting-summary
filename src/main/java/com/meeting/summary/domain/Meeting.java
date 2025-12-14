@@ -3,8 +3,9 @@ package com.meeting.summary.domain;
 import java.time.LocalDateTime;
 
 /* 회의록 정보 */
-public class meeting {
-	private long id; 						//회의록 고유번호(SEQ)
+public class Meeting {
+	private Long meetingId; 				//회의록 고유번호(SEQ)
+	private Long userId;					//사용자 고유번호(FK)
 	private String title;					//회의록 제목
 	private String body;					//회의록 내용
 	private String description;				//회의록 메모
