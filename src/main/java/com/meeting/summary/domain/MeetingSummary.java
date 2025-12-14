@@ -10,7 +10,8 @@ public class MeetingSummary {
 	private String summaryType;			//회의록 요약 타입(요약, 자세히 요약 등)
 	private String summaryTitle;		//회의록 제목
 	private String summaryBody;			//회의록 요약 내용
-	private String useToken;			//사용한 토큰 수
+	private Integer useToken;			//사용한 토큰 수
+	private boolean deleted;			//삭제 여부. 기본값 false, 삭제 시 true
 	private String createdBy;			//생성자
 	private LocalDateTime createdDate;	//생성 시각
 	private String modifiedBy;			//수정자
