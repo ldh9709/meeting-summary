@@ -13,7 +13,7 @@ public class Meeting {
 	private String status;					//회의록 상태(요약완료/요약미완료)
 	private LocalDateTime startTime;		//회의 시작 시간
 	private LocalDateTime endTime;			//회의 종료 시간
-	private boolean isDeleted;				//삭제 여부. 기본값 false, 삭제 시 true
+	private boolean deleted;				//삭제 여부. 기본값 false, 삭제 시 true
 	private String createdBy;				//생성자
 	private LocalDateTime createdDate;		//생성 시각
 	private String modifiedBy;				//수정자
