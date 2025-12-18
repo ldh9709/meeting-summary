@@ -7,36 +7,75 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<properties>
+		<!-- Spring 관련 라이브러리 버전 지정, 밑에서 ${spring.version}로 재사용-->
 		<spring.version>5.3.34</spring.version>
+		<!-- 소스 파일 인코딩을 UTF-8로 명시 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 
-		<!-- Spring MVC -->
+		<!-- Spring MVC 사용 선언, 
+		DispatcherServlet, @Controller, @RequestMapping 같은 MVC 기능들이 이 라이브러리에 있음 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 
-		<!-- Servlet API (Tomcat이 제공하니까 provided) -->
+		<!-- Servlet API (Tomcat이 제공하니까 provided), 서블릿 표준 인터페이스 라이브러리.
+		HttpServletRequest, HttpServletResponse, Filter 등 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>4.0.1</version>
+			<!-- 개발/컴파일할 때만 필요하고, 실제 배포할 땐 컨테이너(Tomcat)가 제공한다는 의미 -->
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- JSP에서 JSTL 쓸 때 -->
+		<!-- JSP에서 JSTL 쓸 때, JSP에서 <c:forEach>, <c:if> 같은 JSTL 태그 쓰려면 필요한
+		라이브러리-->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
 
-		<!-- 나중에 MyBatis / DB 드라이버 여기 추가 예정 -->
+		<!-- PostgreSQL JDBC, PostgreSQL 데이터베이스에 접속하기 위한 JDBC 드라이버 -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.7.3</version>
+		</dependency>
 
+		<!-- MyBatis 라이브러리, XML Mapper / 어노테이션 Mapper / SqlSession 기능이 들어있음 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.15</version>
+		</dependency>
+
+		<!-- MyBatis와 Spring을 연결해주는 어댑터. SqlSessionFactoryBean,
+		MapperScannerConfigurer,
+		트랜잭션과 연동, Mapper 인터페이스를 @Autowired로 주입 받아 사용 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>3.0.3</version>
+		</dependency>
+
+		<!-- Spring JDBC (DataSource, 트랜잭션) 
+		DataSource, JdbcTemplate, 트랜잭션 매니저(DataSourceTransactionManager) 같은 JDBC 관련 스프링
+		지원들
+		MyBatis-Spring과 함께 많이 쓰임.
+		나중에 root-context.xml에서 DataSource 설정, DataSourceTransactionManager,
+		@Transactional 사용할 때 필요.-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
