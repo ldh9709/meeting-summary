@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.meeting.summary.mapper.TeamMapper">
+
+    <!-- 컬럼명(스네이크) -> DTO 필드명(카멜) 매핑 -->
+    <resultMap id="TeamResultMap" type="com.meeting.summary.domain.Team">
+        <id property="teamId"      			column="team_id"/>			<!-- 팀 고유번호(SEQ) column : DB 컬럼명 -->
+        <result property="teamName"      	column="team_name"/>		<!-- 팀 이름 -->
+        <result property="deleted"   		column="deleted"/>			<!-- 삭제 여부. 기본값 false, 삭제 시 true  -->
+        <result property="createdBy"   		column="created_by"/>		<!-- 생성자 -->
+        <result property="modifiedBy" 		column="modified_by"/>  	<!-- 생성 시각 -->   	  
+        <result property="createdDate" 		column="created_date"/>		<!-- 수정자 -->
+        <result property="modifiedDate" 	column="modified_date"/>	<!-- 수정 시각 -->
+    </resultMap>
+
+    <!-- 팀 등록 useGeneratedKeys="true" : INSERT 실행 후 DB가 만든 PK를 받아옴 | keyProperty="id" : 받아온 생성 키 값을 파라미터 객체의 어느 프로퍼티에 넣을지 지정-->
+    <insert id="insert" parameterType="com.meeting.summary.domain.Team" useGeneratedKeys="true" keyProperty="teamId">
+        INSERT INTO team    
+        (team_name
+        ,deleted
+        ,created_by
+        ,created_date
+        ,modified_by
+        ,modified_date)
+        VALUES
+        (#{teamName}
+        ,false
+        ,#{createdBy}
+        ,NOW()
+        ,#{modifiedBy}
+        ,NOW())
+    </insert>
+    
+    <!-- 팀 수정 Parameter : userId, teamId, team -->    
+    <update id="update">
+        UPDATE team
+        SET team_name 		= #{team.teamName}
+           ,modified_by 	= #{userId}
+           ,modified_date 	= NOW()
+        WHERE 1 = 1
+       	  AND team_id		= #{teamId}
+          AND deleted 		= false
+    </update>
+    
+    <!-- 팀 삭제 Parameter : userId, teamId -->
+    <update id="delete">
+        UPDATE team
+        SET deleted 		= true
+           ,modified_by 	= #{userId}
+           ,modified_date 	= NOW()
+        WHERE 1 = 1
+          AND team_id		= #{teamId}
+          AND deleted	 	= false
+    </update>
+	
+    <!-- 팀 조회 -->
+    <select id="findByTeamId" resultMap="TeamResultMap">
+        SELECT team_id
+        	  ,team_name
+        FROM  team
+        WHERE 1 = 1
+          AND team_id	= #{teamId}
+          AND deleted	= false
+    </select>
+    
+</mapper>

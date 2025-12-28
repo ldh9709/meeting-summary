@@ -26,3 +26,4 @@ Thumbs.db
 *.pem
 application.properties
 application-*.properties
+/bin/
